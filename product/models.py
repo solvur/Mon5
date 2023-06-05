@@ -20,3 +20,4 @@ class Review(models.Model):
     text = models.TextField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE,
                                 null=True)
+    stars = models.FloatField(default=0)
