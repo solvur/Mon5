@@ -16,19 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls.static import static
-from shop_api import settings
-from product.views import products_categories_api_view, product_review_api_view, products_api_view, \
-    categories_retrieve_api_view, review_retrieve_api_view, products_retrieve_api_view
+from product import views
 
 urlpatterns = [
-    path('api/''admin/', admin.site.urls),
-    path('api/v1/categories/<int:id>/', products_categories_api_view),
-    path('api/v1/categories/', categories_retrieve_api_view),
-    path('api/v1/reviews/', product_review_api_view),
-    path('api/v1/reviews/<int:id>/', review_retrieve_api_view),
-    path('api/v1/products/', products_api_view),
-    path('api/v1/products/<int:id>/', products_retrieve_api_view),
+    path('admin/', admin.site.urls),
+    path('api/v1/categories/', views.category_api_view),
+    path('api/v1/categories/<int:id>/', views.category_detail_api_view),
+    path('api/v1/products/', views.products_api_view),
+    path('api/v1/products/<int:id>/', views.product_detail_api_view),
+    path('api/v1/reviews/', views.reviews_api_view),
+    path('api/v1/reviews/<int:id>/', views.review_detail_api_view),
+    path('api/v1/products/reviews/', views.products_reviews_api_view),
 ]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
